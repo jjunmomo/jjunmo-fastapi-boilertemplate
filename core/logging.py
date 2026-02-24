@@ -21,6 +21,9 @@ def setup_logging() -> None:
     """앱 시작 시 호출. 환경별 로깅 설정"""
     logger.remove()
 
+    # request_id 기본값 설정 (요청 컨텍스트 밖에서도 에러 없이 동작)
+    logger.configure(extra={"request_id": "-"})
+
     if settings.is_local:
         logger.add(
             sys.stderr,
